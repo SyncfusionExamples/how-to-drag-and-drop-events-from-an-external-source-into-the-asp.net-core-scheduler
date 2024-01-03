@@ -1,0 +1,123 @@
+﻿@page
+@using Syncfusion.EJ2
+@{
+    var data = new HospitalData().GetHospitalData();
+    var list = new HospitalData().GetWaitingListData();
+}
+
+<div class="schedule-wrapper">
+    <ejs-schedule id="schedule" width="80%"
+                  selectedDate="new DateTime(2024,01,01)"
+                  startHour="09:00"
+                  endHour="15:00">
+        <e-schedule-eventsettings datasource="data">
+        </e-schedule-eventsettings>
+    </ejs-schedule>
+
+    <ejs-treeview id="treeview"
+                  allowDragAndDrop = "true"
+                  dragArea=".schedule-wrapper"
+                  cssClass="treeview-external-drag"
+                  nodeTemplate="#treeTemplate"
+                  nodeDragStop="onDragStop">
+        <e-treeview-fields dataSource="list" id="Id" text="Subject"></e-treeview-fields>
+    </ejs-treeview>
+</div>
+
+<style>
+    .schedule-wrapper {
+        display: flex;
+    }
+
+    .treeview-external-drag .e-list-text {
+        border: 0.5px solid #E1E7EC;
+        height: 50px;
+        line-height: 15px;
+        padding: 0 5px;
+        width: 180px;
+    }
+
+    .treeview-external-drag #waitlist {
+        height: 50%;
+        font-weight: bold;
+        font-family: "Segoe UI";
+        font-size: 12px;
+        padding: 5px 0 0 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .treeview-external-drag #waitcategory {
+        height: 50%;
+        font-family: "Segoe UI";
+        font-size: 10px;
+        opacity: 0.6;
+        padding-left: 10px;
+        padding-top: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .treeview-external-drag .e-list-item.e-hover > .e-fullrow,
+    .treeview-external-drag .e-list-item.e-active > .e-fullrow,
+    .treeview-external-drag .e-list-item.e-active.e-hover > .e-fullrow,
+    .treeview-external-drag .e-list-item.e-active.e-node-focus>.e-fullow {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: none;
+    }
+
+    .treeview-external-drag .e-fullrow {
+        height: 55px;
+        width: auto;
+    }
+
+    .treeview-external-drag .e-text-content {
+        padding: 0;
+        background-color: inherit;
+    }
+
+    .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-subject-wrap,
+    .e-drag-item.treeview-external-drag .e-icon-expandable {
+        display: none;
+    }
+</style>
+
+<script id="treeTemplate">
+    <div id="waitdetails" >
+        <div id="waitlist" > ${ Subject } </div>
+         <div id = "waitcategory" > ${ DepartmentName } - ${ Description } </div>
+    </div>
+</script>
+
+<script>
+    function onDragStop(args){
+        var schedulerElem = ej.base.closest(args.target, '.e-content-wrap');
+        var treeViewInst = document.getElementById('treeview').ej2_instances[0];
+        var schedulerInst = document.getElementById('schedule').ej2_instances[0];
+        if (schedulerElem && args.target.classList.contains('e-work-cells')){
+            var treeViewData = treeViewInst.fields.dataSource;
+            var filteredData = treeViewData.filter(
+                function (item) { return item.Id === parseInt(args.draggedNodeData.id, 10); }
+            );
+            var cellData = schedulerInst.getCellDetails(args.target);
+            var eventData = {
+                id: schedulerInst.getEventMaxID(),
+                Subject: filteredData[0].Subject,
+                Description: filteredData[0].Description,
+                DepartmentName: filteredData[0].DepartmentName,
+                StartTime: cellData.startTime,
+                EndTime: cellData.endTime,
+            };
+            // To add the event without opening editor
+            // schedulerInst.addEvent(eventData);
+
+            // To open editor window while adding events
+            schedulerInst.openEditor(eventData, "Add", true);
+            var updatedList = treeViewData.filter(
+                function (item) { return item.Id !== parseInt(args.draggedNodeData.id, 10); }
+            );
+            treeViewInst.fields.dataSource = updatedList;
+        }
+    }
+</script>
