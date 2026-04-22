@@ -1,28 +1,30 @@
 # How to Drag and Drop Events from an External Source into the ASP.NET Core Scheduler
 
-A quick-start ASP.NET Core project that shows how to drag and drop events from an external source into the ASP.NET Core Scheduler control. This project contains code to drag an item from the TreeView control to the Scheduler and update it as an event using the nodeDragStop event of the TreeView control.
+This ASP.NET Core project demonstrates how to drag and drop events from an external source into the Scheduler control. The implementation uses TreeView for source items and enables real-time event creation via the nodeDragStop event handler.
 
-Check out this online demo for external drag and drop in the Syncfusion ASP.NET Core Scheduler control:
+## Documentation
+
+For comprehensive guidance on building with Syncfusion ASP.NET Core components, refer to the official documentation:
+
+- **Introduction:** https://ej2.syncfusion.com/aspnetcore/documentation/introduction
+- **Scheduler Component:** https://ej2.syncfusion.com/aspnetcore/documentation/schedule/getting-started
+- **TreeView Drag and Drop:** https://ej2.syncfusion.com/aspnetcore/documentation/treeview/drag-and-drop
+
+## Live Demo
+
+Explore the external drag and drop functionality in action:
 https://ej2.syncfusion.com/aspnetcore/Schedule/ExternalDragDrop#/fluent
 
-Refer to the following documentation to get started with the Syncfusion ASP.NET Core Scheduler control: 
-https://ej2.syncfusion.com/aspnetcore/documentation/schedule/getting-started
+## Requirements
 
-Refer to the following documentation to get started with the Syncfusion ASP.NET Core Treeview control: 
-https://ej2.syncfusion.com/aspnetcore/documentation/treeview/getting-started
+- Visual Studio 2022 or later
+- .NET 7.0 SDK or higher
 
-Refer to the following documentation about drag and drop in the Syncfusion ASP.NET Core Treeview control: 
-https://ej2.syncfusion.com/aspnetcore/documentation/treeview/drag-and-drop
+## Getting Started
 
-Watch the video to get started with the ASP.NET Core Scheduler control:
-https://www.youtube.com/watch?v=1YVOmjid1Ow 
+Clone the repository and press `F5` to run the application in Visual Studio.
 
-Tutorial video: https://www.syncfusion.com/tutorial-videos
+## Resources
 
-## Project pre-requisites
-
-Make sure that you have the compatible versions of Visual Studio 2022 and .NET 7.0 SDK framework in your machine before starting to work on this project.
-
-### How to run this application?
-
-To run this application, you need to clone the `how-to-drag-and-drop-events-from-an-external-source-into-the-asp.net-core-scheduler` repository and then press the `F5` key to run the application.
+- **ASPCore Video Tutorial:** https://www.youtube.com/watch?v=1YVOmjid1Ow
+- **Syncfusion Tutorial Videos:** https://www.syncfusion.com/tutorial-videos
