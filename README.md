@@ -17,7 +17,7 @@ This ASP.NET Core project demonstrates how to drag and drop events from an exter
 - Visual Studio 2022 or later
 - .NET 7.0 SDK or higher
 
-## How to run this application?
+## How to run this application
 
 1. Checkout this project to a location in your disk.
 2. Open the solution file using Visual Studio 2022.
